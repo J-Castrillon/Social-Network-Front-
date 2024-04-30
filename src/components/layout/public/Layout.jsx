@@ -1,15 +1,22 @@
-import React from 'react'
-import { PublicHeader } from './Header'
-import { Outlet } from 'react-router-dom'
+import React from "react";
+import { PublicHeader } from "./Header";
+import { Navigate, Outlet } from "react-router-dom";
+import useSession from '../../../hooks/useSession'
 
 export const Layout = () => {
+  const { session, counters } = useSession();
+
   return (
     <div>
-        <PublicHeader/> 
+      <PublicHeader />
 
+      {session?.id ? (
+        <Navigate to={"/social"} />
+      ) : (
         <section className="layout__content">
-            <Outlet/>
+          <Outlet />
         </section>
+      )}
     </div>
-  )
-}
+  );
+};

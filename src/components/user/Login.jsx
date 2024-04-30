@@ -4,12 +4,15 @@ import { useForm } from "../../hooks/useForm";
 import { postFetching } from "../../helpers/Fetching/Fetchs";
 import Swal from "sweetalert2";
 import { SessionReducer } from "../../reducers/Session";
+import useSession from "../../hooks/useSession";
+import { saveToLocalStorage } from "../../helpers/storage/Session";
 
 export const Login = () => {
   const { form, setForm, changes } = useForm({});
   const [loged, setLoged] = useState(false);
   const [error, setError] = useState("");
   const [session, dispatch] = useReducer(SessionReducer, {});
+  const {setSession} = useSession({}); 
 
   const login = async (e) => {
     e.preventDefault();
@@ -28,13 +31,17 @@ export const Login = () => {
         width: 500,
       });
 
-      // Crear un middleware para mantener la sesion;
       const newSession = {
         type: "newSession",
         payload: { user: response.user, token: response.token },
       };
 
       dispatch(newSession);
+      const local = saveToLocalStorage({user: response.user, token: response.token});
+
+      setTimeout(()=>{
+        setSession(response.user);
+      }, 1000);
     } else {
       setError(response.message);
     }

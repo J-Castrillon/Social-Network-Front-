@@ -26,18 +26,20 @@ export const postFetching = async (complement, body) => {
     }
 }
 
-export const getFetching = async (url) => {
+export const getFetching = async (url, Authorization) => {
     try{
-        const request = await fetch(`${apiUrl}${complement}`,{
+        return await fetch(`${apiUrl}${url}`,{
             method: 'GET', 
             headers: {
-                Authorization: ''
+                Authorization: Authorization !== undefined && Authorization !== null ? Authorization : '', 
             }
         }).then(response => {
             if(!response)
                 throw new Error("Request Error"); 
 
             return response.json(); 
+        }).then(data => {
+            return data; 
         }).catch(error=>{
             console.log(error); 
         })

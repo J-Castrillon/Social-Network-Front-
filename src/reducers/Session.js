@@ -6,7 +6,7 @@ export const SessionReducer = (state = {}, action) => {
     case "endSession":
       state = action.payload;
       return state;
-    case "session":
+    default:
       return state;
   }
 };
