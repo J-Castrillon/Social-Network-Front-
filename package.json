@@ -11,9 +11,11 @@
   },
   "dependencies": {
     "dotenv": "^16.4.5",
+    "javascript-time-ago": "^2.5.10",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-router-dom": "^6.22.3",
+    "react-time-ago": "^7.3.3",
     "sweetalert2": "^11.10.8"
   },
   "devDependencies": {

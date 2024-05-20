@@ -1,16 +1,18 @@
 import React, { useEffect, useState } from "react";
-import { getFetching } from "../../../helpers/Fetching/Fetchs";
-import { Loader } from "../Loader";
-import { getToLocalStorage } from "../../../helpers/storage/Session";
-import { UsersLists } from "./components/UsersLists";
+import { getFetching } from "../../helpers/Fetching/Fetchs";
+import { Loader } from "../layout/Loader";
+import { getToLocalStorage } from "../../helpers/storage/Session";
+import { UsersLists } from "../layout/private/components/UsersLists";
+import { useNavigate, useParams } from "react-router-dom";
 
-export const Persons = () => {
+export const Followings = () => {
   const [users, setUsers] = useState([]);
   const [pagination, setPagination] = useState(1);
   const [limit, setLimit] = useState(false);
   const [loader, setLoader] = useState(true);
   const [followings, setFollowings] = useState([]);
   const [profile, setProfile] = useState({});
+  const params = useParams();
   const url = import.meta.env.VITE_REACT_APP_URL;
 
   useEffect(() => {
@@ -23,14 +25,22 @@ export const Persons = () => {
   }, [pagination]);
 
   const getAllUsers = async () => {
-    const request = await getFetching(`user/allUsers/${pagination}`);
-    const activeUsers = request?.list.filter(
-      (user) => user?._id !== getToLocalStorage("Session")?.user?.id
+    const request = await getFetching(
+      `follow/followers/${
+        params.id ? params.id : getToLocalStorage("Session")?.user?.id
+      }/${pagination}`
     );
-    request?.status === "Success" ? setUsers(activeUsers) : setUsers([]);
-    pagination === request?.pages && setLimit(true);
 
-    setLoader(false);
+    if (request?.status === "Success") {
+      const allFollowings = request?.following?.map((follower) => {
+        return follower.followed;
+      });
+      setUsers(allFollowings);
+      pagination === request?.pages && setLimit(true);
+      setLoader(false);
+    } else {
+      setUsers([]);
+    }
   };
 
   const getFollowings = async () => {
@@ -63,7 +73,12 @@ export const Persons = () => {
     return (
       <>
         <header className="content__header">
-          <h1 className="content__title">Personas</h1>
+          <h1 className="content__title">
+            Seguidos{" "}
+            {profile.name
+              ? `de ${profile.name}`
+              : `de ${getToLocalStorage("Session")?.user?.name}`}
+          </h1>
         </header>
 
         <UsersLists
@@ -83,6 +98,7 @@ export const Persons = () => {
               onClick={prevPage}
             ></button>
           )}
+
           <span>{pagination}</span>
           {limit !== true && (
             <button

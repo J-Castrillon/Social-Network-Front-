@@ -1,6 +1,7 @@
 import React, { createContext, useEffect, useState } from "react";
 import { getToLocalStorage } from "../helpers/storage/Session";
 import { getFetching } from "../helpers/Fetching/Fetchs";
+import { useParams } from "react-router-dom";
 
 const SessionContext = createContext();
 
@@ -8,6 +9,7 @@ export const SessionProvider = ({ children }) => {
   const [session, setSession] = useState({});
   const [counters, setCounters] = useState({});
   const [loading, setLoading] = useState(true); 
+  const params = useParams(); 
 
   useEffect(() => {
     sessionUser();
@@ -27,7 +29,7 @@ export const SessionProvider = ({ children }) => {
       );
 
       const counters = await getFetching(
-        `follow/followers/${dataSession?.user?.id}`,
+        `follow/followers/${params.id ? params.id : dataSession?.user?.id}`,
         dataSession.token
       );
 

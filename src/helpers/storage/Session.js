@@ -6,8 +6,6 @@ export const saveToLocalStorage = (body) => {
 export const getToLocalStorage = (key) => {
   const request = JSON.parse(localStorage.getItem(key));
 
-  console.log(request); 
-
   if (!request) {
     return "Error";
   }

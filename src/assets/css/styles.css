@@ -171,6 +171,10 @@ body {
   cursor: pointer;
 }
 
+.content__button--rigth{
+  float: right;
+}
+
 .content__button:hover,
 .content__btn-more-post:hover {
   background-color: var(--color-background-btn-success-hover);
@@ -235,6 +239,7 @@ body {
 }
 
 .post__button {
+  margin-left: 10px;
   color: var(--color-text-navbar);
   padding: 1rem 1.5rem;
   font-size: 1.4rem;
@@ -295,10 +300,18 @@ body {
   border-radius: 100rem;
   margin-right: 1.5rem;
   overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center; 
 }
 
 .container-avatar__img {
-  height: 100%;
+  height: auto;
+  width: 100%;  
+}
+
+.container-avatar__img:hover{
+  cursor: pointer; 
 }
 
 .container-names__name {
@@ -356,9 +369,9 @@ body {
   width: 100%;
 }
 
-form {
+/* form {
   max-width: 300px;
-}
+} */
 
 .aside__container-form form {
   max-width: 100%;
@@ -428,7 +441,7 @@ button {
   width: 100%;
   display: flex; 
   justify-content: center;
-  align-items: center;
+  align-items: flex-start;
 }
 
 .feed__content>section{
@@ -441,7 +454,8 @@ button {
 
 /* ----------------------------------------------------- */
 #main_content-register .content__header, #main_content-register .content__posts,
-#main_content-login .content__header, #main_content-login .content__posts{
+#main_content-login .content__header, #main_content-login .content__posts,
+#main_content-config .content__header, #main_content-config .content__posts {
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -459,4 +473,57 @@ button {
 .btn-primary:hover{
   background: #2e6fbe; 
   border: 2px solid #2e6fbe; 
+}
+
+#config-form{
+  width: 80%;
+}
+.input-file{
+  display: flex; 
+  flex-direction: row; 
+  justify-content: center;
+  align-items: center;
+}
+
+.avatar-config{
+  border-radius: 100rem;
+}
+
+.avatar-config > img{
+  width: 50%;
+}
+
+.follow__button--green{
+  background: rgb(1, 177, 1); 
+  border:none; 
+}
+
+.follow__button--green:hover{
+  background:rgb(2, 156, 2);
+  cursor: pointer;  
+}
+
+/* Loader */
+.loader {
+  border: 5px solid #f3f3f3; /* Light grey */
+  border-top: 5px solid #3498db; /* Blue */
+  border-radius: 50%;
+  width: 30px;
+  height: 30px;
+  animation: spin 600ms linear infinite;
+  margin: 20% auto;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+.img_publication{
+  width: 30%; 
+  height: auto;
+}
+
+.post__body{
+  width: 75%;
 }

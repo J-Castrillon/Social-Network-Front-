@@ -7,7 +7,6 @@ import Swal from "sweetalert2";
 
 export const Nav = () => {
   const { session, setSession, setCounters } = useSession({});
-  console.log(session);
   const navigate = useNavigate();
   const apiUrl = import.meta.env.VITE_REACT_APP_URL;
 
@@ -47,16 +46,9 @@ export const Nav = () => {
     <nav className="navbar__container-lists">
       <ul className="container-lists__menu-list">
         <li className="menu-list__item">
-          <NavLink to="/social" href="#" className="menu-list__link">
+          <NavLink to="/social/feed" href="#" className="menu-list__link">
             <i className="fa-solid fa-house"></i>
             <span className="menu-list__title">Inicio</span>
-          </NavLink>
-        </li>
-
-        <li className="menu-list__item">
-          <NavLink to="/social/feed" href="#" className="menu-list__link">
-            <i className="fa-solid fa-list"></i>
-            <span className="menu-list__title">Timeline</span>
           </NavLink>
         </li>
 
@@ -80,13 +72,13 @@ export const Nav = () => {
           <a href="#" className="list-end__link-image">
             {session?.image !== "default.png" ? (
               <img
-                src={`${apiUrl}user/avatar/${session.image}`}
+                src={`${apiUrl}user/avatar/${session?.image}`}
                 className="list-end__img"
                 alt="Imagen de perfil"
               />
             ) : (
               <img
-                src={avatar}
+                src={avatar && avatar}
                 className="list-end__img"
                 alt="Imagen de perfil"
               />

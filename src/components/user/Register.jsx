@@ -29,7 +29,7 @@ export const Register = () => {
         <h1 className="content__title">Registro</h1>
       </header>
 
-      <div className="content__posts">
+      <section className="content__posts">
         {saved === true ? (
           <div
             className="confirmation_message"
@@ -128,7 +128,7 @@ export const Register = () => {
             Regístrate
           </button>
         </form>
-      </div>
+      </section>
     </div>
   );
 };

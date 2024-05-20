@@ -9,6 +9,9 @@ import { Error } from "../components/layout/Error";
 import { SessionProvider } from "../context/SessionProvider";
 import { Persons } from "../components/layout/private/Persons";
 import { Configs } from "../components/user/Configs";
+import { Followings } from "../components/follow/Followings";
+import { Followers } from "../components/follow/Followers";
+import { Profile } from "../components/user/Profile";
 
 export const Routing = () => {
   return (
@@ -26,7 +29,9 @@ export const Routing = () => {
             <Route path="feed" element={<Feed />} />
             <Route path="persons" element={<Persons />} />
             <Route path="configs" element={<Configs />} />
-
+            <Route path="following/:id?" element={<Followings/>}></Route>
+            <Route path="followers/:id?" element={<Followers/>}></Route>
+            <Route path="profile/:id" element={<Profile/> }></Route>
           </Route>
 
           <Route path="*" element={<Error />} />
